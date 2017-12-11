@@ -16,14 +16,12 @@ public class Connect {
     private static final  String key2 = "c3f919ad177f72a864a6924fc0f72070";
 
     public void APIConnection(String cityID){
-        String cityId = "1269750";
-        String cityLondon = "2643743";
-        String Rich = "2154855";
+        //String cityId = "1269750";
+        //String cityLondon = "2643743";
+        //String Rich = "2154855";
 
         String query = "http://api.openweathermap.org/data/2.5/weather?id=" + cityID + "&units=metric" + "&mode=xml" + "&APPID=" + key2;
 
-
-        //"http://api.openweathermap.org/data/2.5/weather?id=1269750&units=metric&mode=xml&APPID=c3f919ad177f72a864a6924fc0f72070;
         query = query.replace(" ", "%20");
         try
         {

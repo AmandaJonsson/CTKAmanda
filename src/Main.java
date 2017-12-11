@@ -10,71 +10,62 @@ import java.awt.event.ActionListener;
 public class Main implements ActionListener{
 
     String city;
-    JTextField text;
-
-    JTextArea textarea;
+    JTextField cityID;
+    JTextArea weatherInfo;
 
     public Main(){
 
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
+        frame.setSize(400, 400);
 
-        JFrame frame1 = new JFrame();
-        frame1.setDefaultCloseOperation(frame1.EXIT_ON_CLOSE);
-        JPanel frame= new JPanel();
-        JLabel cityName = new JLabel();
-        cityName.setText("Enter a cityID : ");
-        frame.add(cityName);
-        cityName.setLocation(20, 380);
+        JPanel panel = new JPanel();
+        frame.add(panel);
+
+        JLabel enterACityID = new JLabel();
+        enterACityID.setText("Enter a cityID : ");
+        panel.add(enterACityID);
+        enterACityID.setLocation(20, 380);
 
 
-        frame1.add(frame);
-        frame1.setSize(400, 400);
-        text = new JTextField(20);
-        frame.add(text);
-        frame1.setVisible(true);
-        text.addActionListener(this);
+        cityID = new JTextField(20);
+        panel.add(cityID);
+        cityID.addActionListener(this);
 
-        textarea= new JTextArea();
+        weatherInfo= new JTextArea();
+        weatherInfo.setSize(400, 200);
+        weatherInfo.setLocation(0, 0);
 
-        textarea.setSize(400, 200);
-        textarea.setLocation(0, 0);
+        panel.add(weatherInfo);
+        panel.validate();
 
-        frame.add(textarea);
-        frame.validate();
+        frame.setVisible(true);
+
     }
 
     private void submitAction() {
-        city = text.getText();
+        city = cityID.getText();
         System.out.println(city);
         Connect view = new Connect();
         view.APIConnection(city);
         WeatherHandler wh = new WeatherHandler();
-        String ne = wh.cityID;
-        String name = wh.cityName;
-        String temp = wh.temperature;
-        String mintemp = wh.minTemp;
-        String maxtemp = wh.maxTemp;
-        String wind = wh.windValue;
-        String winddir = wh.windName;
-        String clouds= wh.clouds;
-        String weather = wh.weather;
 
-        String print = "City ID:" + ne + '\n' + "City name: " + name + '\n' + "Temperature: " + temp + '\n' + "Min temp: " + mintemp + '\n' + "Max temp: " + maxtemp + '\n'+ "Wind: "+ wind + '\n'+
-                "Wind direction: " + winddir + '\n' + "Clouds: "+ clouds + '\n' + "Weather: "+ weather;
+        String print = "City ID:" + wh.cityID + '\n' + "City name: " + wh.cityName + '\n' + "Temperature: " + wh.temperature + '\n' + "Min temp: " + wh.minTemp + '\n' + "Max temp: " + wh.maxTemp + '\n'+ "Wind: "+ wh.windValue + '\n'+
+                "Wind direction: " + wh.windName + '\n' + "Clouds: "+ wh.clouds + '\n' + "Weather: "+ wh.weather;
 
-        textarea.setText(print);
-
+        weatherInfo.setText(print);
     }
 
-
-    public static void main(String [] args) {
-        new Main();
-    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         submitAction();
 
     }
+    public static void main(String [] args) {
+        new Main();
+    }
+
 }
 
 
